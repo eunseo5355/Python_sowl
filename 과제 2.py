@@ -11,9 +11,9 @@ a = 'My  naMe  is  Son  Chang  Ha:  my  pin  is  000125-3!!!!!!.'
 a = 'My  naMe  is  Son  Chang  Ha:  my  pin  is  000125-3!!!!!!.'
 a = a.replace("  ", " ")
 a = a.replace(":", ",")
+a = a.replace("m", "M")
 l = a.split(" ")
 l[1] = l[1].lower()
-l[6] = l[6].upper()
 l[9] = l[9].replace('!', '')
 a = " ".join(l)
 print(a)
