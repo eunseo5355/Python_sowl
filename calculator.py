@@ -6,6 +6,24 @@
 e를 입력하기 전까지는 계산기가 끝나면 안됩니다.
 숫자나 연산자를 잘못 입력하면 다시 입력받도록 해주세요.
 """
+from typing import List
+
+
+def add(a, b):
+    return a + b
+
+
+def sub(a, b):
+    return a - b
+
+
+def mul(a, b):
+    return a * b
+
+
+def div(a, b):
+    return a / b
+
 
 while True:
     number1 = input("첫번째 숫자:")
@@ -24,6 +42,8 @@ while True:
     while operator not in ['+', '-', '/', '*']:
         operator = input("다시 입력해주세요:")
 
+    result = 0
+
     number2 = input("두번째 숫자:")
     if number2 == 'e':
         break
@@ -33,13 +53,21 @@ while True:
         number2 = input("다시 입력해주세요:")
 
     if operator == '+':
-        print(int(number1) + int(number2))
+        result = str(add(int(number1), int(number2)))
+        print(add(int(number1), int(number2)))
 
     if operator == '-':
-        print(int(number1) - int(number2))
+        result = str(sub(int(number1), int(number2)))
+        print(sub(int(number1), int(number2)))
 
     if operator == '/':
-        print(int(number1) / int(number2))
+        result = str(div(int(number1), int(number2)))
+        print(div(int(number1), int(number2)))
 
     if operator == '*':
-        print(int(number1) * int(number2))
+        result = str(mul(int(number1), int(number2)))
+        print(mul(int(number1), int(number2)))
+
+    file = open("calculator result.txt", 'w')
+    file.write(result)
+    file.close()
