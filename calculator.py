@@ -6,7 +6,6 @@
 e를 입력하기 전까지는 계산기가 끝나면 안됩니다.
 숫자나 연산자를 잘못 입력하면 다시 입력받도록 해주세요.
 """
-from typing import List
 
 
 def add(a, b):
@@ -26,48 +25,54 @@ def div(a, b):
 
 
 while True:
-    number1 = input("첫번째 숫자:")
-    if number1 == 'e':
+    print("종료하려면 e, 재시작을 하시려면 c를 입력해주세요.")
+    num = input('계산식을 입력해주세요:')
+    if num == 'e':
         break
-    elif number1 == 'c':
+    elif num == 'c':
         continue
-    while not number1.isdigit():
-        number1 = input("다시 입력해주세요:")
 
-    operator = input("연산자:")
-    if operator == 'e':
-        break
-    elif operator == 'c':
+    if '+' in num:
+        a, b = num.split('+')
+        operator = '+'
+
+    elif '-' in num:
+        a, b = num.split('-')
+        operator = '-'
+
+    elif '*' in num:
+        a, b = num.split('*')
+        operator = '*'
+
+    elif '/' in num:
+        a, b = num.split('/')
+        operator = '/'
+
+    else:
+        print('잘못된 입력입니다. 올바른 연산자를 입력해주세요.')
         continue
-    while operator not in ['+', '-', '/', '*']:
-        operator = input("다시 입력해주세요:")
 
-    result = 0
-
-    number2 = input("두번째 숫자:")
-    if number2 == 'e':
-        break
-    elif number2 == 'c':
+    if not a.isdigit() or not b.isdigit():
+        print("잘못된 입력입니다. 숫자를 입력해주세요.")
         continue
-    while not number2.isdigit():
-        number2 = input("다시 입력해주세요:")
 
     if operator == '+':
-        result = str(add(int(number1), int(number2)))
-        print(add(int(number1), int(number2)))
+        with open("calculator result.txt", 'a') as file:
+            file.write("결과값은 %d입니다.\n" % add(int(a), int(b)))
+            print("결과값은 %d입니다." % add(int(a), int(b)))
 
-    if operator == '-':
-        result = str(sub(int(number1), int(number2)))
-        print(sub(int(number1), int(number2)))
+    elif operator == '-':
+        with open("calculator result.txt", 'a') as file:
+            file.write("결과값은 %d입니다.\n" % sub(int(a), int(b)))
+            print("결과값은 %d입니다." % sub(int(a), int(b)))
 
-    if operator == '/':
-        result = str(div(int(number1), int(number2)))
-        print(div(int(number1), int(number2)))
+    elif operator == '*':
+        with open("calculator result.txt", 'a') as file:
+            file.write("결과값은 %d입니다.\n" % mul(int(a), int(b)))
+            print("결과값은 %d입니다." % mul(int(a), int(b)))
 
-    if operator == '*':
-        result = str(mul(int(number1), int(number2)))
-        print(mul(int(number1), int(number2)))
+    elif operator == '/':
+        with open("calculator result.txt", 'a') as file:
+            file.write("결과값은 %d입니다.\n" % div(int(a), int(b)))
+            print("결과값은 %d입니다." % div(int(a), int(b)))
 
-    file = open("calculator result.txt", 'w')
-    file.write(result)
-    file.close()
